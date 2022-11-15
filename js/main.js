@@ -1,6 +1,4 @@
-const nameColumnEl = document.querySelector('.name-col');
-const roleColumnEl = document.querySelector('.role-col');
-const imgColumnEl = document.querySelector('.img-col');
+const cardContainerEl = document.getElementById('cardContainer');
 
 const users = [
 	{
@@ -36,15 +34,35 @@ const users = [
 ];
 
 for (let i = 0; i < users.length; i++) {
-	const img = document.createElement('img');
-	img.src = `img/${users[i].foto}`;
-
-	appendData(nameColumnEl, users[i].nome);
-	appendData(roleColumnEl, users[i].ruolo);
-	appendData(imgColumnEl, img);
+	const card = createCard(users[i]);
+	cardContainerEl.append(card);
 }
 
-function appendData(container, data) {
-	container.append(data);
-	container.innerHTML += '<br>';
+/**
+ * creates a card with a h3, p, and img
+ * @param {Object} user the object where we get the data
+ */
+
+function createCard(user) {
+	const col = document.createElement('div');
+	col.classList.add('col');
+
+	const card = document.createElement('div');
+	card.classList.add('my-card');
+
+	const name = document.createElement('h3');
+	name.innerText = user.nome;
+
+	const role = document.createElement('p');
+	role.classList.add('text-muted');
+	role.innerText = user.ruolo;
+
+	const img = document.createElement('img');
+	img.classList.add('img-fluid', 'rounded-5');
+	img.src = `img/${user.foto}`;
+
+	card.append(img, name, role);
+	col.append(card);
+
+	return col;
 }

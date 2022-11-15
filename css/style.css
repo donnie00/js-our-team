@@ -1,0 +1,8 @@
+.my-card {
+	border-radius: 2rem;
+	background-color: #434b55;
+}
+
+.my-card :not(img) {
+	padding: 0.5rem;
+}
